@@ -69,11 +69,11 @@
 
 #define    LPCHC_SYNC_CYCLE_COUNTER_INFINITE  0xFF000000
 
-int TRACE_LPC = 0;
+int TRACE_LPC = 1;
 #define TRACZCOMP(args...) if(TRACE_LPC){TRACFCOMP(args);}
 
 /* Set to enable LPC tracing. */
-/* #define LPC_TRACING 1 */
+#define LPC_TRACING 1
 #ifdef LPC_TRACING
 #define LPC_TRACFCOMP(des,printf_string,args...) \
     TRACFCOMP(des,printf_string,##args) /* FIX FIRDATA */
@@ -239,7 +239,7 @@ errorHndl_t lpc_read( LpcTransType i_type,
 
     } while(0);
 
-    LPC_TRACFCOMP( "readLPC> %08X[%d] = %08X", l_addr, i_size, *reinterpret_cast<uint32_t*>( o_data )  >> (8 * (4 - i_size)) );
+    LPC_TRACFCOMP( "readLPC> %08X[%d] = %08X", l_addr, i_size, *(uint32_t*)( o_data )  >> (8 * (4 - i_size)) );
 
     return l_err;
 }

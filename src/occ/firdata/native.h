@@ -46,7 +46,7 @@ extern "C" {
 #define TRACDCOMP(frmt,args...)
 #endif // FIRD_DEBUG
 
-#define TRACFCOMP(frmt,args...) TRACE(g_trac_inf,INFO_MRK frmt,##args)
+#define TRACFCOMP(frmt,args...) TRACE(g_trac_err,INFO_MRK frmt,##args)
 
 #else // NO_TRAC_STRINGS
 

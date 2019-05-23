@@ -54,6 +54,7 @@
 #include <thrm_thread.h>
 #include "scom.h"
 #include <fir_data_collect.h>
+#include <pnor_ipmi.h>
 
 extern void __ssx_boot;
 extern uint32_t G_occ_phantom_critical_count;
@@ -801,6 +802,14 @@ void Main_thread_routine(void *private)
     // the interrupt handler will just restart the timer until we use this
     // enable switch to actually start the watchdog function.
     ENABLE_WDOG;
+
+    // IPMI check
+    if (!G_ipl_time && OCC_IS_FIR_MASTER())
+    {
+        hioPnorInfo_t pi;
+        errorHndl_t e = getInfo(&pi);
+        TRAC_ERR("PNOR info: err=%i, support=%i", e ? 1 : 0, pi.iv_useIPMI ? 1 : 0);
+    }
 
     while (TRUE)
     {

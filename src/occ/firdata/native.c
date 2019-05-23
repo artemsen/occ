@@ -32,7 +32,7 @@ void sleep( SsxInterval i_nanoseconds )
     ssx_sleep(SSX_NANOSECONDS(i_nanoseconds));
 }
 
-int TRACE_XSCOM=0;
+int TRACE_XSCOM=1;
 
 int32_t xscom_read( uint32_t i_address, uint64_t * o_data )
 {
